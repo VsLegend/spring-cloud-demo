@@ -1,0 +1,28 @@
+server:
+  port: 8001
+
+spring:
+  application:
+#    与client1服务的名称相同，模拟服务集群
+    name: eureka-client-01
+  security:
+    user:
+      name: root
+      password: password
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://locahost:3306/kec?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&transformedBitIsBoolean=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: password
+
+eureka:
+  instance:
+    # 客户端依靠心跳机制与eureka服务发现者（即注册中心）联系，并保持其注册更新
+    # 心跳时间间隔 默认30s
+    lease-renewal-interval-in-seconds: 30
+    # 离上一次心跳的时间，超过设置时间就表示，该服务已宕机，与注册中心联系中断 默认90s
+    lease-expiration-duration-in-seconds: 90
+  client:
+    serviceUrl:
+      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:9999/eureka/
+
