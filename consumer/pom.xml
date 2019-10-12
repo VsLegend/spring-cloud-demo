@@ -46,6 +46,13 @@
       <version>1.4.7.RELEASE</version>
     </dependency>
 
+    <!--zuul网关-->
+    <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-zuul -->
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-zuul</artifactId>
+      <version>1.4.7.RELEASE</version>
+    </dependency>
 
     <!--Swagger2整合-->
     <dependency>
