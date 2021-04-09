@@ -20,10 +20,6 @@ public class ClientController {
 
   @GetMapping("/getInfo")
   public String getInfo() {
-    String className = Thread.currentThread().getStackTrace()[1].getClassName();
-    String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
-    System.out.println("----------------------------------------------" + className);
-    System.out.println("----------------------------------------------" + methodName);
-    return dataService.getData();
+    return "client 返回数据";
   }
 }

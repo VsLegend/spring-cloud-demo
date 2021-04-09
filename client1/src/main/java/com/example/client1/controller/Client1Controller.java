@@ -20,6 +20,6 @@ public class Client1Controller {
 
   @GetMapping("/getInfo")
   public String getInfo() {
-    return dataService.getData();
+    return "client1 返回数据";
   }
 }
