@@ -29,6 +29,11 @@ public class RabbitReceiver {
     log.info("接收到{}， 的消息", RabbitMqConstants.DEAD_LETTER_QUEUE);
     String json = new String(message.getBody(), StandardCharsets.UTF_8);
     log.info("消息内容：{}", json);
+    /**
+     * 手动返回ack确认消息
+     * DeliveryTag：它代表了 RabbitMQ 向该 Channel 投递的这条消息的唯一标识 ID，是一个单调递增的正整数，delivery tag 的范围仅限于 Channel
+     * multiple：为了减少网络流量，手动确认可以被批处理，当该参数为 true 时，则可以一次性确认 delivery_tag 小于等于传入值的所有消息
+     */
     channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
   }
 
@@ -41,6 +46,10 @@ public class RabbitReceiver {
     log.info("接收到{}， 的消息", RabbitMqConstants.DEAD_LETTER_QUEUE);
     String json = new String(message.getBody(), StandardCharsets.UTF_8);
     log.info("消息内容：{}", json);
-    channel.basicAck(message.getMessageProperties().getDeliveryTag(), true);
+    /**
+     * 手动nack
+     * requeue：表明是否需要再次入队重试
+     */
+    channel.basicNack(message.getMessageProperties().getDeliveryTag(), true, false);
   }
 }

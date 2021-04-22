@@ -10,17 +10,30 @@ spring:
     addresses: localhost:5676,localhost:5678,localhost:5680
     username: root
     password: 123456
+    # 启用 生产者消息发送失败时返回错误
     publisher-returns: true
     template:
       mandatory: true
     listener:
+      # 直连模式 生产者-消费者 1对1
       direct:
         acknowledge-mode: manual
+      # 简单收发模式 1对多
       simple:
+        # 不是MQ的重试，仅仅是消费者内部进行的重试
+        retry:
+          enabled: true
+          # 最大重试次数
+          max-attempts: 10
+          # 重试最大间隔
+          max-interval: 10000
+          # 重试初始间隔
+          initial-interval: 2000
+        # 手动ack
         acknowledge-mode: manual
+        # 消费者核心线程
         concurrency: 5
+        # 消费者最多线程数
         max-concurrency: 50
-  servlet:
-    multipart:
-      max-request-size: 500MB
-      max-file-size: 500MB
+        # 限流 消费者每次从队列所取消息的数量
+        prefetch: 1
