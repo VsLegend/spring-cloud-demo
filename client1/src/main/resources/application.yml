@@ -20,3 +20,13 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:9999/eureka/,http://localhost:9998/eureka/
 #      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:9999/eureka/
+
+feign:
+  httpclient:
+    enabled: true
+  hystrix:
+    enabled: true
+
+logging:
+  level:
+    com.example.client1.feign.ClientService: debug

@@ -10,7 +10,7 @@ spring:
 #      name: root
 #      password: password
   datasource:
-    driverClassName: com.mysql.jdbc.Driver
+    driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://129.211.80.218:3306/chat?useUnicode=true&characterEncoding=UTF8&zeroDateTimeBehavior=convertToNull&autoReconnect=true&transformedBitIsBoolean=true&useSSL=false&serverTimezone=UTC
     username: root
     password: Wwangyong@202007
@@ -27,3 +27,8 @@ eureka:
       defaultZone: http://localhost:9999/eureka/,http://localhost:9998/eureka/
 #      defaultZone: http://${spring.security.user.name}:${spring.security.user.password}@localhost:9999/eureka/
 
+feign:
+  httpclient:
+    enabled: true
+  hystrix:
+    enabled: true
