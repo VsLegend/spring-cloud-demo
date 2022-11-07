@@ -10,7 +10,7 @@ import org.springframework.cloud.openfeign.FeignClient;
  * @Description:
  */
 
-@FeignClient(name = "eureka-client-01", fallback = ClientServiceHystrix.class, configuration = FeignConfig.class)
+@FeignClient(name = "eureka-client-01", configuration = FeignConfig.class)
 public interface ClientService {
 
     @RequestLine("GET /client/getInfo")

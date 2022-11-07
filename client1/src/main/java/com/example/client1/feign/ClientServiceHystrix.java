@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
  * @Description:
  */
 
-@Component
-public class ClientServiceHystrix implements ClientService {
-    @Override
-    public String getInfo() {
-        return null;
-    }
-}
+//@Component
+//public class ClientServiceHystrix implements ClientService {
+//    @Override
+//    public String getInfo() {
+//        return null;
+//    }
+//}
