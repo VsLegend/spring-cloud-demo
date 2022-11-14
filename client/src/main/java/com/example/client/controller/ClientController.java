@@ -1,5 +1,6 @@
 package com.example.client.controller;
 
+import com.example.client.config.CustomProperrties;
 import com.example.client.service.DataService;
 import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,16 @@ public class ClientController {
   @Resource
   DataService dataService;
 
+  @Resource
+  private CustomProperrties customProperrties;
+
   @GetMapping("/getInfo")
   public String getInfo() {
     return "client 返回数据";
+  }
+
+  @GetMapping("/property")
+  public String property() {
+    return customProperrties.getName();
   }
 }

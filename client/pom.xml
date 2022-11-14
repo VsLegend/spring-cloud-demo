@@ -26,7 +26,6 @@
       <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
     </dependency>
 
-
     <!-- https://mvnrepository.com/artifact/tk.mybatis/mapper -->
     <dependency>
       <groupId>tk.mybatis</groupId>
