@@ -1,11 +1,9 @@
 package com.example.rabbitmq.mq;
 
 import com.example.rabbitmq.constant.RabbitMqConstants;
-import com.rabbitmq.client.AMQP;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
-import org.springframework.amqp.core.ReturnedMessage;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Component;
@@ -21,7 +19,7 @@ import java.util.UUID;
  */
 @Component
 @Slf4j
-public class RabbitSender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnsCallback {
+public class RabbitSender implements RabbitTemplate.ConfirmCallback, RabbitTemplate.ReturnCallback {
 
 
   @Resource
@@ -30,7 +28,7 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback, RabbitTempl
   @PostConstruct
   public void init() {
     rabbitTemplate.setConfirmCallback(this);
-    rabbitTemplate.setReturnsCallback(this);
+    rabbitTemplate.setReturnCallback(this);
   }
 
   /**
@@ -49,13 +47,9 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback, RabbitTempl
   }
 
   @Override
-  public void returnedMessage(ReturnedMessage returned) {
-    String exchange = returned.getExchange();
-    String routingKey = returned.getRoutingKey();
-    int replyCode = returned.getReplyCode();
-    String replyText = returned.getReplyText();
-    log.info("发送的消息返回体：{}", returned.toString());
-    Message message = returned.getMessage();
+  public void returnedMessage(Message message, int replyCode, String replyText, String exchange, String routingKey) {
+    log.info("发送的消息返回体：{}， replyCode：{}，replyText：{}，exchange：{}，routingKey：{}",
+            message.toString(), replyCode, replyText, exchange, routingKey);
     message.getBody();
     MessageProperties properties = message.getMessageProperties();
     log.info("消息体信息：{}", properties.toString());
@@ -87,5 +81,4 @@ public class RabbitSender implements RabbitTemplate.ConfirmCallback, RabbitTempl
     log.info("结束发送消息 : " + routeKey);
     log.info("消息发送成功");
   }
-
 }
