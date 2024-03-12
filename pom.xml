@@ -24,9 +24,7 @@
 
   <modules>
     <module>client</module>
-    <module>client1</module>
     <module>eureka</module>
-    <module>eureka1</module>
     <module>rabbitmq</module>
     <module>rocketmq</module>
     <module>zuul</module>
